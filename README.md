@@ -4,7 +4,7 @@ This script parsed the GenBank multi-record files, extracted their published lit
 
 ## Python version
 
-Python, version 3.5.2-release (x86_64-pc-linux-gnu). Copyright (C) 2001-2017 Python Software Foundation.
+Python, version 3.5.2-release (x86_64-pc-linux-gnu). Copyright © 2001-2017 Python Software Foundation.
 
 ## Built With
 
