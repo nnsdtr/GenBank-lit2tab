@@ -22,3 +22,7 @@ Unpublished
 
 ### Author
 * **Nunes, D.T.** - [nnsdtr](https://github.com/nnsdtr)
+
+### See also
+* [barcode-article-miner](https://github.com/nnsdtr/barcode-article-miner)
+* [multiple-pdf2txt](https://github.com/nnsdtr/multiple-pdf2txt)
