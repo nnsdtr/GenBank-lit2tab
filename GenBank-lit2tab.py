@@ -8,7 +8,7 @@ print("File opened!\n")
 output_filename = str(input("Insert output filename: "))
 output = open(output_filename, "w")
 print("Parsing file...")
-seq_list = list(SeqIO.parse(handle, "genbank"))
+gb_list = list(SeqIO.parse(handle, "genbank"))
 handle.close()
 print("File parsed!\n")
 
@@ -22,8 +22,8 @@ unpublished = 0
 old_articles = 0
 rejected_articles = 0
 n_accessions = 0
-for i in range(0, len(seq_list)):
-	annotation = seq_list[i].annotations
+for i in range(0, len(gb_list)):
+	annotation = gb_list[i].annotations
 	n_accessions += 1
 
 	try:
@@ -31,7 +31,7 @@ for i in range(0, len(seq_list)):
 	except KeyError:
 		comment = "N/A"
 	try:	
-		ref = seq_list[i].annotations["references"]
+		ref = gb_list[i].annotations["references"]
 		for j in range(0, len(ref)):
 			authors_ = ref[j].authors
 			ttl = ref[j].title
@@ -75,7 +75,7 @@ for i in range(0, len(seq_list)):
 	
 print("Information collected!\n")
 
-del seq_list
+del gb_list
 
 print("Removing duplicates...")
 
