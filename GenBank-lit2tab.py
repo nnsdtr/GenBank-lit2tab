@@ -1,12 +1,11 @@
 from Bio import SeqIO
 import re
 
-#filename = "HFB_Unified_Database.gp"
 filename = str(input("Insert GenBank filename: "))
 print("\nOpening file...")
 handle = open(filename, "rU")
 print("File opened!\n")
-output_filename = filename[:-3]+".reftab"
+output_filename = str(input("Insert output filename: "))
 output = open(output_filename, "w")
 print("Parsing file...")
 seq_list = list(SeqIO.parse(handle, "genbank"))
@@ -15,12 +14,8 @@ print("File parsed!\n")
 
 head = ["Title", "Authors", "Journal", "PMID"]
 header = str("$".join(head)) + "\n"
-#print(header)
-#output.write(header)
 
-#seqlist = seq_list[0].annotations["comment"]
-#print(seqlist)
-lista_init = []
+init_list = []
 print("Collecting information...")
 direct_sub = 0
 unpublished = 0
@@ -61,7 +56,7 @@ for i in range(0, len(seq_list)):
 			if pubmedid == "":
 				pubmedid = "N/A"
 
-			year_match = re.search('[2][0][01][0-8]|[1][9][0-9][0-9]', jrnl)
+			year_match = re.search('[1][9][0-9][0-9]|[2][0][01][0-8]', jrnl)
 			if year_match:
 				year = year_match.group()
 				if int(year) < 2012:
@@ -71,20 +66,23 @@ for i in range(0, len(seq_list)):
 				rejected_articles += 1
 				continue
 
-			list = [ttl, authors_, jrnl, year,pubmedid]
+			list = [ttl, authors_, jrnl, year, pubmedid]
 			line = str("$".join(list))+"\n"
-			lista_init.append(line)
+			init_list.append(line)
 			
 	except KeyError:
 		pass
+	
 print("Information collected!\n")
-del seq_list
-print("Removing duplicates...")
-lista_final = []
 
-for ref in lista_init:
-	if ref not in lista_final:
-		lista_final.append(ref)
+del seq_list
+
+print("Removing duplicates...")
+
+final_list = []
+for ref in init_list:
+	if ref not in final_list:
+		final_list.append(ref)
 
 print("Duplicates Removed!\n")
 
@@ -94,8 +92,8 @@ output.write("Direct_subm$Unpublished$Old_articles$NoYearInfo$No.SequencesinGBfi
 direct_unpub = str(direct_sub) + "$" + str(unpublished) + "$" + str(old_articles) + "$" + str(rejected_articles) + "$" + str(n_accessions) + "\n\n"
 output.write(direct_unpub)
 output.write("Title$Authors$Journal$Year$PMID\n")
-for i in range(0,len(lista_final)):
-	line = lista_final[i]
+for i in range(0,len(final_list)):
+	line = final_list[i]
 	output.write(line)
 print("Output Saved!")	
 
