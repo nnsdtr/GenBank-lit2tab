@@ -49,7 +49,7 @@ for i in range(0, len(gb_list)):
 
 			if jrnl == "":
 				jrnl = "N/A"
-			elif jrnl == "Unpublished":
+			elif jrnl.lower() == "unpublished":
 				unpublished += 1
 				continue
 				
