@@ -1,6 +1,6 @@
 # DNA Barcoding in Fungi: GenBank-lit2tab
 
-Biomarker sequences were downloaded from NCBI database in GenBank multi-record format and, after that, python script was built to extract specifically their literature data, saving it in a tabular form.
+Biomarker sequences were downloaded from NCBI database in GenBank multi-record format and, after that, python script was built to extract specifically their literature data, saving it in tabular format.
 
 ## Example call
 `GenBank-lit2tab.py /home/user/GenBank-multirecord.gb`
